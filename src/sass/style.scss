@@ -1,5 +1,3 @@
-
-
 body {
   background-color: black;
 }
@@ -13,5 +11,49 @@ body {
   width: 1024px;
   height: 863px;
   margin: auto;
-  background: url( "/images/board.jpg") no-repeat;
+  background: url("/images/board.jpg") no-repeat;
+}
+
+#messageArea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: yellow;
+  background-color: yellow;
+}
+
+form {
+  position: absolute;
+  bottom: 0px;
+  right: 0;
+  padding: 10px;
+  background-color: #e84118;
+
+  input {
+    font-size: 15px;
+    background-color: #f5f6fa;
+    border-color: #8c7ae6;
+  }
+}
+
+table{
+  position: absolute;
+  left: 173px;
+  top: 98px;
+  border-spacing: 0px;
+
+  td {
+    width: 89px;
+    height: 91px;
+    border-style: solid;
+    border-color: transparent;
+  }
+}
+
+.hit {
+  background: url("/images/ship.png") no-repeat center center;
+}
+
+.miss {
+  background: url("/images/miss.png") no-repeat center center;
 }
