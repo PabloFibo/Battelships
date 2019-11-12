@@ -19,17 +19,17 @@ const model = {
   shipLength: 3,
   shipSunk: 0,
   ships: [{
-    location: ['06', '16', '26'],
-    hits: ['', '', '']
-  },
-  {
-    location: ['24', '34', '44'],
-    hits: ['', '', '']
-  },
-  {
-    location: ['10', '11', '12'],
-    hits: ['', '', '']
-  }
+      location: ['06', '16', '26'],
+      hits: ['', '', '']
+    },
+    {
+      location: ['24', '34', '44'],
+      hits: ['', '', '']
+    },
+    {
+      location: ['10', '11', '12'],
+      hits: ['', '', '']
+    }
   ],
   fire: function(guess) {
     for (let i = 0; i < this.numShips; i++) {
@@ -59,4 +59,47 @@ const model = {
   }
 };
 
-model.fire('06');
+const controller = {
+  guesses: 0,
+  processGuess: function(guess) {
+    let location = parseGuess(guess);
+    if (location) {
+      this.guesses++;
+      let hit = model.fire(location);
+      if (hit && model.shipSunk === model.numShips) {
+        view.displayMessage('Zatopiłeś wszystkie moje okręty, w' + this.guesses + ' próbach');
+      }
+    }
+  }
+};
+
+function parseGuess(guess) {
+  let alphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
+  if (guess === null || guess.length !== 2) {
+    alert('Musisz podać literę (od A do F) i cyfrę (od 0 do 5)');
+  } else {
+    let firstChar = guess.charAt(0);
+    let row = alphabet.indexOf(firstChar);
+    let column = guess.charAt(1);
+
+    if (isNaN(row) || isNaN(column)) {
+      alert('To nie są poprawne współrzędne');
+    } else if (row < 0 || row >= model.boardSize || column < 0 || column >= model.boardSize) {
+      alert('Wybrałeś pole poza planszą');
+    } else {
+      return row + column;
+    }
+  }
+  return null;
+}
+
+function init() {
+  let fireButton = document.getElementById('fireButton');
+  fireButton.onclick = handleFireButton;
+}
+
+function handleFireButton(){
+
+}
+
+window.onload = init;
